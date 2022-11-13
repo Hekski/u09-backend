@@ -26,8 +26,8 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
-    origon: 'https://taupe-llama-7bcb9e.netlify.app',
+    origin: '*',
+    // origin: 'https://taupe-llama-7bcb9e.netlify.app',
   })
 );
 app.use(xss());
