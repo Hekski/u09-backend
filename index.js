@@ -36,7 +36,7 @@ app.use(mongoSanitize());
 app.use('/api', routes);
 
 // PORT
-const port = process.env.DB_PORT || 4001;
+const port = process.env.DB_PORT || 8001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
