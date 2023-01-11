@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const routes = require('./routes');
@@ -18,10 +18,8 @@ mongoose.connect(mongo_URI, {
 });
 
 // MIDDLEWARES - Parsing & Sanitize
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-/* app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); */
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
    cors({
