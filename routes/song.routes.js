@@ -9,6 +9,6 @@ const auth = require('../middleware/auth');
 // Routes
 router.get('/like/:id', auth, songController.getLikes);
 router.post('/like/:id', validateObjectId, auth, songController.postLike);
-router.delete('/like/:id', validateObjectId, songController.deleteLike);
+router.delete('/like/:id', validateObjectId, auth, songController.deleteLike);
 
 module.exports = router;

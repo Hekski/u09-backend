@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Henrik Berglund",
