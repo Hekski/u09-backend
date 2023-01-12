@@ -18,9 +18,6 @@ mongoose.connect(mongo_URI, {
 });
 
 // MIDDLEWARES - Parsing & Sanitize
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(
    cors({
       credentials: true,
@@ -33,6 +30,11 @@ app.use(
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
    })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+/* app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); */
+app.use(cookieParser());
 app.use(xss());
 app.use(mongoSanitize());
 
