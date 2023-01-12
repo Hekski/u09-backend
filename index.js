@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -17,23 +16,21 @@ mongoose.connect(mongo_URI, {
    useUnifiedTopology: true,
 });
 
+app.use((req, res, next) => {
+   res.header(
+      'Access-Control-Allow-Origin',
+      'https://music-streaming-app.netlify.app'
+   );
+   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   res.header('Access-Control-Allow-Credentials', true);
+   next();
+});
+
 // MIDDLEWARES - Parsing & Sanitize
-app.use(
-   cors({
-      credentials: true,
-      origin: [
-         'http://localhost:3000',
-         'https://u09-backend.onrender.com',
-         'https://music-streaming-app.netlify.app/',
-         '*',
-      ],
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-   })
-);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-/* app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false })); */
 app.use(cookieParser());
 app.use(xss());
 app.use(mongoSanitize());
