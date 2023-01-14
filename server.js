@@ -26,7 +26,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MIDDLEWARES - Parsing & Sanitize
-app.use(
+const corsOptions = {
+   origin: (origin, callback) => {
+      callback(null, true);
+   },
+   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+   allowedHeaders: [
+      'Access-Control-Allow-Origin',
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'Authorization',
+   ],
+   credentials: true,
+};
+/* app.use(
    cors({
       credentials: true,
       origin: [
@@ -36,7 +51,7 @@ app.use(
       ],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
    })
-);
+); */
 /* app.use(
    cors({
       origin: '*',
