@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MIDDLEWARES - Parsing & Sanitize
-/* const corsOptions = {
+const corsOptions = {
    origin: (origin, callback) => {
       callback(null, true);
    },
@@ -38,22 +38,21 @@ app.use(express.urlencoded({ extended: true }));
       'Accept',
       'Authorization',
    ],
-   credentials: true,
+   // credentials: false,
 };
 
 app.options('*', cors(corsOptions));
-app.use(cors(corsOptions)); */
-app.use(
+app.use(cors(corsOptions));
+/* app.use(
    cors({
       credentials: true,
       origin: [
          'http://localhost:3000',
-         'https://63c2c8e4df14f613ce7d2a69--music-streaming-app.netlify.app/' ||
-            '*',
+         'https://music-streaming-app.netlify.app/',
       ],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
    })
-);
+); */
 /* app.use(
    cors({
       origin: '*',
