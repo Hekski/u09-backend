@@ -61,27 +61,20 @@ const authController = {
       try {
          if (await user.comparePassword(password)) {
             const token = authService.genAuthToken(user);
-            res.cookie('jwttoken', token)
-               .status(200)
-               /* .send({
-          user,
-          token,
-        }); */
-               .json({
-                  user: user.toObject(),
-                  token,
-                  success: true,
-                  message: 'User logged in',
-               });
+            res.json({
+               user: user.toObject(),
+               token,
+               success: true,
+               message: 'User logged in',
+            });
          } else {
-            return res.status(400).json({
+            return res.status(401).json({
                success: false,
                message: 'Invalid email or password',
                data: null,
             });
          }
       } catch (error) {
-         // next(error);
          res.status(500).json({
             success: false,
             message: error,
