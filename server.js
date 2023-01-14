@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-// const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -26,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MIDDLEWARES - Parsing & Sanitize
-const corsOptions = {
+/* const corsOptions = {
    origin: (origin, callback) => {
       callback(null, true);
    },
@@ -43,26 +42,25 @@ const corsOptions = {
 };
 
 app.options('*', cors(corsOptions));
-app.use(cors(corsOptions));
-/* app.use(
+app.use(cors(corsOptions)); */
+app.use(
    cors({
       credentials: true,
       origin: [
          'http://localhost:3000',
-         'https://music-streaming-app.netlify.app',
-         '*',
+         'https://63c2c8e4df14f613ce7d2a69--music-streaming-app.netlify.app/' ||
+            '*',
       ],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
    })
-); */
+);
 /* app.use(
    cors({
       origin: '*',
    })
-); */
+);
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
-// app.use(cookieParser());
 app.use(mongoSanitize());
 
 // ROUTES
