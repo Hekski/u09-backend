@@ -14,52 +14,19 @@ mongoose.connect(mongo_URI, {
    useUnifiedTopology: true,
 });
 
-/* app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-}); */
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MIDDLEWARES - Parsing & Sanitize
-const corsOptions = {
-   origin: (origin, callback) => {
-      callback(null, true);
-   },
-   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-   allowedHeaders: [
-      'Access-Control-Allow-Origin',
-      'Origin',
-      'X-Requested-With',
-      'Content-Type',
-      'Accept',
-      'Authorization',
-   ],
-   // credentials: false,
-};
 
-app.options('*', cors(corsOptions));
-app.use(cors(corsOptions));
-/* app.use(
-   cors({
-      credentials: true,
-      origin: [
-         'http://localhost:3000',
-         'https://music-streaming-app.netlify.app/',
-      ],
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-   })
-); */
-/* app.use(
-   cors({
-      origin: '*',
-   })
-);
-/* app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false })); */
+app.use((req, res, next) => {
+   res.header('Access-Control-Allow-Origin', '*');
+   res.header('Access-Control-Allow-Headers');
+   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+   next();
+});
+
 app.use(mongoSanitize());
 
 // ROUTES
