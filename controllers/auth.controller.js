@@ -29,11 +29,9 @@ const authController = {
          const user = await authService.createUser(name, email, password);
          const token = authService.genAuthToken(user);
 
-         // send verification email
-
-         res.cookie('jwttoken', token).status(201).send({
+         res.send({
             user,
-            token,
+            jwttoken: token,
             success: true,
             message: 'User created',
          });
@@ -63,7 +61,7 @@ const authController = {
             const token = authService.genAuthToken(user);
             res.json({
                user: user.toObject(),
-               token,
+               jwttoken: token,
                success: true,
                message: 'User logged in',
             });

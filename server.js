@@ -20,12 +20,28 @@ app.use(express.urlencoded({ extended: true }));
 
 // MIDDLEWARES - Parsing & Sanitize
 
-app.use((req, res, next) => {
-   res.header('Access-Control-Allow-Origin', '*');
+app.use(
+   cors({
+      credentials: true,
+      origin: [
+         'http://localhost:3000',
+         'https://music-streaming-app.netlify.app/',
+         'https://music-streaming-app.netlify.app/login',
+      ],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+   })
+);
+
+/* app.use((req, res, next) => {
+   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
    res.header('Access-Control-Allow-Headers');
-   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+   res.header(
+      'Access-Control-Allow-Methods',
+      'GET, POST, PUT, OPTIONS, DELETE'
+   );
+   console.log('Request received', req.headers.host, req.url, req.method);
    next();
-});
+}); */
 
 app.use(mongoSanitize());
 
@@ -33,7 +49,7 @@ app.use(mongoSanitize());
 app.use('/api', routes);
 
 // PORT
-const port = process.env.DB_PORT || 8001;
+const port = process.env.DB_PORT;
 app.listen(port, () => {
    console.log(`Server running on port ${port}`);
 });

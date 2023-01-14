@@ -7,9 +7,9 @@ const validateObjectId = require('../middleware/validateObjectId');
 const auth = require('../middleware/auth');
 
 // Routes
-router.get('/', playlistController.getAllPlaylists);
-router.get('/:id', playlistController.getPlaylistsById);
-router.post('/:id', playlistController.createPlaylist);
-router.put('/:id', playlistController.addSongToPlaylist);
+router.get('/', auth, playlistController.getAllPlaylists);
+router.get('/:id', auth, playlistController.getPlaylistsById);
+router.post('/:id', auth, playlistController.createPlaylist);
+router.put('/:id', auth, playlistController.addSongToPlaylist);
 
 module.exports = router;

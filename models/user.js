@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
    name: {
@@ -60,7 +61,7 @@ userSchema.statics.emailTaken = async function (email) {
 userSchema.methods.generateAuthToken = function () {
    let user = this;
    const userObj = { sub: user._id.toHexString(), email: user.email };
-   const token = jwt.sign(userObj, process.env.DB_SECRET, { expiresIn: '1d' });
+   const token = jwt.sign(userObj, process.env.JWT_SECRET, { expiresIn: '1d' });
    return token;
 };
 
